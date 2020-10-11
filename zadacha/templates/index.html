@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<title>Programming assistance</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style_PA.css' %}">
+	<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Решаем задачи программирования для студентов" />
+	<meta name="keywords" content="помощь, студентам, программирование, задания">
+		<style type="text/css">
+.my-custom-label {
+	margin-top: 8px;
+        display: inline-block;
+    width: 40px;
+    height: 76px;
+    line-height: 0px;
+    /* background: #efefef; */
+    text-align: center;
+}
+
+.my-custom-label > input[type=radio] {
+    display: none;
+}
+
+.my-custom-label > span {
+    background: #fff;
+    border: solid 4px #bbb;
+    display: contents;/*inline-table;*/
+    width:42px;
+    height: 20px;
+    border-radius: 100%;
+    vertical-align:middle;
+}
+
+.my-custom-label > input[type=radio]:checked + span {
+    background: #0ff;
+    border:4px solid #8b7cf7;
+}
+.base_socset{
+    font-size: 27px;
+    color:gray;
+}
+
+.my-custom-label > input[type=radio]:checked + span i.icon-whatsapp{
+	color:#47c62e;
+}
+.my-custom-label > input[type=radio]:checked + span i.icon-mail{
+	color:#d64704;
+}
+.my-custom-label > input[type=radio]:checked + span i.icon-telegram{
+	color:#6199fb;
+}
+p.change_set{
+	display: none;
+}
+.my-custom-label > input[type=radio]:checked ~ p{
+	display: block;
+}
+.my-custom-label > input[type=radio]:checked ~ p input.wts{
+	border-color:#47c62e ;
+}
+.my-custom-label > input[type=radio]:checked ~ p input.pos{
+	border-color: #d64704;
+}
+.my-custom-label > input[type=radio]:checked ~ p input.tlgrm{
+	border-color: #6199fb;
+}
+.attach{
+	font-size: 27px;
+	color:black;
+}
+.input_nik{
+	    position: absolute;
+    left: 7%;
+    width: 86% !important;
+}
+
+	</style>
+</head>
+<body>
+	<div id="block_head">
+		<div class="head">
+			<img class="logo" src="{% static 'img/logo2.jpg' %}">
+			<ul class='menu'>
+				<li><a href="#block_plus">Преимущества</a></li>
+				<li><a href="#block_about">О нас</a></li>
+				<li><a href="#block_uslugi">Услуги</a></li>
+				<li><a href="#block_timeline">Этапы</a></li>
+				<li><a href="#block_questions">Вопросы</a></li>
+			</ul>
+		</div>
+		<div class="head_text">
+		<span class='title'>Мы первые в Казахстане</span><br><br>
+		<span class="text">создали онлайн сервис для помощи в решении задач по программированию</span>
+		</div>
+		<div class="form_zayavka">
+			<h3>Ваша задача - Наше решение</h3>
+			<form method="post" enctype="multipart/form-data" action="{% url 'add_esep' %}">
+				{% csrf_token %}
+					<label class="my-custom-label">
+					    <input name="test" type="radio" value='1' checked/>
+					    <span><i class='base_socset icon-whatsapp'></i></span>
+					    <p class="change_set"><input class="input_nik wts" type="text" name="whatsapp" placeholder="Ватсап"></p>
+					</label>
+					<label class="my-custom-label">
+					    <input name="test" type="radio" value='2' />
+					    <span><i class='base_socset icon-mail'></i></span>
+					    <p class="change_set"><input class="input_nik pos" type="email" name="email" placeholder="Почта"></p>
+					</label>
+					<label class="my-custom-label">
+					    <input name="test" type="radio" value='3' />
+					    <span><i class='base_socset icon-telegram'></i></span>
+					    <p class="change_set"><input class="input_nik tlgrm" type="text" name="telegram" placeholder="Телеграмм"></p>
+					</label>
+
+					<!--<input class="dis_set" type="" disabled="" placeholder="Выберите соцсеть" name="" style="
+
+    width: 86%;
+    background-color: lightgrey;
+    position: absolute;
+    top: 10pz;
+">-->
+
+
+				<p><textarea required name="description" placeholder="Описание задачи"></textarea>
+					<label class="my-custom-label" style="
+    position: absolute;
+    right: 35px;
+">
+
+
+					    <input id="attach" name="file" type="file" style="display: none;">
+					    <span><span class="attach_span"></span><i class="attach icon-attach" title="Нет выбранных файлов"></i></span>
+					</label>
+				</p>
+
+				<p><input required type="date" name="deadline"></p>
+
+
+				<button id="but" class='but' type="submit"><span>Отправить</span>  </button>
+			</form>
+		</div>
+		<picture>
+  <source srcset="{% static 'img/head2.jpg' %}" media="(max-width: 720px)">
+  <img class="back" src="{% static 'img/head.jpg' %}" alt="">
+</picture>
+	</div>
+	<div id="block_plus">
+		<h1 class='title_block'>Преимущества</h1>
+		<div class="plus">
+			<div class='plus1'>
+				<img src="{% static 'img/plan2.png' %}" width=100px>
+				<div class="plus_txt">
+					<h2 class='plus_title'>Первые на рынке</h2>
+					<span class="plus_desc">В Казахстане не так много сервисов для помощи студентам, что уж говорить об узконаправленных знаниях  в программировании</span>
+				</div>
+			</div>
+
+			<div class='plus1'>
+				<img src="{% static 'img/money2.png' %}" width=100px>
+				<div class="plus_txt">
+					<h2 class='plus_title'>Низкая цена</h2>
+					<span class="plus_desc">Мы работаем без посредников, поэтому наша цена является более демократичной по отношению к студентам.Наш прайс начинается от 500тг</span>
+				</div>
+			</div>
+			<div class='plus1'>
+				<img src="{% static 'img/competence2.png' %}" width=100px>
+				<div class="plus_txt">
+					<h2 class='plus_title'>Компетентность</h2>
+					<span class="plus_desc">Наша команда это 12 специалистов, которые не раз побеждали на хакатонах, олимпиадах, и спортивном программировании</span>
+				</div>
+			</div>
+
+			<div class='plus1'>
+				<img src="{% static 'img/anonym2.png' %}" width=100px>
+				<div class="plus_txt">
+					<h2 class='plus_title'>Анонимность</h2>
+					<span class="plus_desc">Многих волнует сохранность своих личных данных, это сказывается на доверрии к сайту, поэтому единственное что нам от вас нужно это ваша задача</span>
+				</div>
+			</div>
+			<div class='plus1'>
+				<img src="{% static 'img/programming2.png' %}" width=100px>
+				<div class="plus_txt">
+					<h2 class='plus_title'>Широкий спектр</h2>
+					<span class="plus_desc">Нужна сортировка пузырьком на Python или же БД на Access или полноценный сайт. Мы готовы взяться за такую работу</span>
+				</div>
+			</div>
+
+			<div class='plus1'>
+				<img src="{% static 'img/garanty2.png' %}" width=100px>
+				<div class="plus_txt">
+					<h2 class='plus_title'>Гарантия</h2>
+					<span class="plus_desc">До назначенного срока мы вам можем сделать доработку в рамках задачи</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="block_about">
+		<div class="about">
+			<span class='about_text'>
+				<h1 class='about_title'>Кто мы</h1>
+				<hr class='about_line' width=60% size=4 noshade color=white>
+				<span class='about_desc'><br>Мы команда программистов-энтузиастов из Казахстана, которые помогают   не сдаваться и не останавливаться на тяжелом пути программирования. <br>
+Наша команда состоит из 12 высококвалифицированных программистов и каждый из нас решает задачи своего направления. <br>
+Поэтому мы не боимся брать задачи различной сложности от скриптов для вычисления периметра до полноценных сайтов для демонстрации MVP <br><br>
+</span>
+				<hr class='about_line' width=60% size=4 noshade color=white>
+			</span>
+		</div>
+	</div>
+	<div id="block_uslugi">
+		<h1 class="title_block">Услуги</h1>
+		<div class="uslugi">
+			<div class="usluga">
+				<img src="{% static 'img/programming.png' %}">
+				<div class="usluga_text">
+					Помощь в решении задач для студентов, школьников, самообучающихся
+				</div>
+			</div>
+			<div class="usluga">
+				<img src="{% static 'img/search.png' %}">
+				<div class="usluga_text">
+					Доработка готового кода
+				</div>
+			</div>
+			<div class="usluga">
+				<img src="{% static 'img/mvp.png' %}">
+				<div class="usluga_text">
+					Создание MVP проектов для стартапов
+				</div>
+			</div>
+			<div class="usluga">
+				<img src="{% static 'img/help.png' %}" height='100px'>
+				<div class="usluga_text">
+					Менторство по популярным языкам программирования
+				</div>
+			</div>
+			<div class="usluga">
+				<img src="{% static 'img/robot.png' %}" height='100px'>
+				<div class="usluga_text">
+					Автоматизация рутинных действии в сети
+				</div>
+			</div>
+			<div class="usluga">
+				<img src="{% static 'img/web.png' %}" height='100px'>
+				<div class="usluga_text">
+					Веб разработка
+				</div>
+			</div>
+			<div class="usluga">
+				<img src="{% static 'img/help.png' %}" height='100px'>
+				<div class="usluga_text">
+					Бесплатная консультация при выборе направления
+				</div>
+			</div>
+			<div class="usluga">
+				<img src="{% static 'img/robot.png' %}" height='100px'>
+				<div class="usluga_text">
+					Парсинг веб-страниц
+				</div>
+			</div>
+			<div class="usluga">
+				<img src="{% static 'img/web.png' %}" height='100px'>
+				<div class="usluga_text">
+					Объяснение задач
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+	<hr width=90% >
+	<div id="block_timeline">
+		<h1>Этапы</h1>
+		<div id="timeline">
+		    <div class="timeline-item">
+		        <div class="timeline-icon">
+		            <span>1</span>
+		        </div>
+		        <div class="timeline-content">
+		            <h4>10 мин</h4>
+		            <h3 style='text-align:center;color:#337AB7;font-family:"Sansation Regular";'>Задача</h3><p>Вы отправляете задачу</p>
+		        </div>
+		    </div>
+		    <!-- Еще события -->
+		    <div class="timeline-item">
+		        <div class="timeline-icon">
+		            <span>2</span>
+		        </div>
+		        <div class="timeline-content">
+		            <h4>В течение 3 часов</h4>
+		            <h3 style='text-align:center;color:#337AB7;font-family:"Sansation Regular";'>Оценка</h3><p>Мы оцениваем вашу задачу и выходим с вами на связь для уточнения деталей</p>
+		        </div>
+		    </div>
+		    <div class="timeline-item">
+		        <div class="timeline-icon">
+		            <span>3</span>
+		        </div>
+		        <div class="timeline-content">
+		            <h4>В течение 1-5 дней</h4>
+		            <h3 style='text-align:center;color:#337AB7;font-family:"Sansation Regular";'>Демонстрация</h3><p>Если это сайт то мы покажем вам демо версию, а если задача то 20% кода и вывод</p>
+		        </div>
+		    </div>
+		    <div class="timeline-item">
+		        <div class="timeline-icon">
+		            <span>4</span>
+		        </div>
+		        <div class="timeline-content">
+		            <h4>В течение 1 часа</h4>
+		            <h3 style='text-align:center;color:#337AB7;font-family:"Sansation Regular";'>Оплата</h3><p>Если вас все устраивает, отправляете деньги(kaspi,qiwi и др.), иначе задача идет на доработку</p>
+		        </div>
+		    </div>
+		    <div class="timeline-item">
+		        <div class="timeline-icon">
+		            <span>5</span>
+		        </div>
+		        <div class="timeline-content">
+		            <h4>В течение 2 часов</h4>
+		            <h3 style='text-align:center;color:#337AB7;font-family:"Sansation Regular";'>Отправка</h3><p>Вы получаете весь код с комментариями и инструкцией по запуску</p>
+		        </div>
+		    </div>
+		</div>
+		<p class='success'>Ваша задача решена</p>
+	</div>
+	<div id="block_questions">
+		<h1 class='title_block' style='color:white'>Вопросы</h1>
+		<div class="faq_form">
+
+
+		<div class="FAQ">
+			<ul class='answers_questions'>
+				<li>
+					<h4 class='question'>Какая гарантия что после оплаты вы решите мою задачу</h4>
+					<span class='answer'>Мы не берем деньги до демонстрации продукта и его функциональности,сперва клиент посмотрит на решение и только после этого мы даем реквизиты для отправки денег и  отправяем уже решенную задачу</span>
+				</li>
+				<li>
+					<h4 class='question'>У вас есть конкретный прайс</h4>
+					<span class='answer'>К сожалению нет, в программировании тяжело поставить точные расценки.Тут все зависит от требуемой  клиенту функциональности.Но простые задачи мы решаем от 500тг</span>
+				</li>
+				<li>
+					<h4 class='question'>Не могу зарегистрироваться</h4>
+					<span class='answer'>Мы заметили что регистрация не самый удобный инструмент для идентификации пользователей так как на постороннем сервисе не каждый готов оставить свои данные, поэтому мы даем вам выбор для обратной связи.</span>
+				</li>
+				<li>
+					<h4 class='question'>Как происходит оплата за ваши услуги</h4>
+					<span class='answer'>Оплата чаще всего проходит по популярным у нас Kaspi и Qiwi.Однако мы пользуемся и большинством других сервисов</span>
+				</li>
+				<li>
+					<h4 class='question'>Чем вы отличаетесь от зарубежных сервисов</h4>
+					<span class='answer'>Это можно посмотреть в блоке Преимущества, но повторимся и скажем что наш сервис решает сугубо задачи программирования и наши расценки привязаны к тенге, а значит вы остаетесь в плюсе, к примеру российске сервисы берут примерно в 3-5 раз дороже, англоязычные сервисы в 5-7 раз дороже, и к тому же в работе с ними могут быть языковые барьеры, а мы свободно говорим на 3 языках</span>
+				</li>
+
+			</ul>
+		</div>
+		<div class="form_questions">
+			<form>
+				 <span style="font-family: &quot;Sansation Regular&quot;;">Остались вопросы, отправьте мы ответим</span>
+				<input type="" name="" placeholder="Ник" style="background-color: #ffffff;border: 1px solid #c4c8f1;text-align: center;height: 18px;">
+				<textarea placeholder="Вопрос" style="
+    background-color: #ffffff;
+    border: 1px solid #c4c8f1;
+    text-align: center;
+    height: 100px;
+"></textarea>
+<button style="
+    box-shadow: 0 0 3px 0px #000000;
+    width: 200px;
+    color: white;
+    align-self: center;
+    display: inline;
+    height: 25px;
+    border: 1px solid #636f97;
+    border-radius: 5px;
+    background-color: #8BC34A;
+"> Отправить </button>
+			</form>
+		</div>
+		</div>
+	</div>
+	<div class="footer">
+		<div class="ftr_block">
+			<p class='icon_title'>Связаться с нами</p>
+			<ul class='icons'>
+				<li><i class='socset icon-vkontakte'></i></li>
+				<li><i class='socset icon-instagram'></i></li>
+				<li><i class='socset icon-whatsapp'></i></li>
+				<li><i class='socset icon-telegram'></i></li>
+				<li><i class='socset icon-mail'></i></li>
+			</ul>
+		</div>
+		<div class="ftr_block">
+			<img src="{% static 'img/logo_footer.png' %}" width="170px" style="
+    margin: 0 auto;
+    margin-bottom: 10px;
+    display: block;
+    ">
+			<span class="ftr_title" style="
+    text-align: center;
+">ProgAss</span><hr width=100px>
+			<span style="
+    text-align: center;
+    color: white;
+    font-family: &quot;Sansation Regular&quot;;
+">С заботой о вас</span>
+
+		</div>
+		<div class="ftr_block">
+			<p class="icon_title" style="
+    margin-bottom: 30px;
+">Контакты</p>
+			<p style="
+    color: white;
+    font-family: &quot;Sansation Regular&quot;;
+    font-size: 14px;
+">г.Кокшетау ул.Ауельбекова 35</p>
+			<p style="
+    color: white;
+    font-family: &quot;Sansation Regular&quot;;
+    font-size: 14px;
+">Сот.: 8 747 928 34 92</p>
+		</div>
+	</div>
+<script type="text/javascript">
+
+
+
+
+		document.getElementById('attach').addEventListener('change', function(){
+
+		if(this.value){
+		var file = document.getElementById("attach").files[0];
+		if ((file.size)/1024/1024>5){
+			var a = "Размер файла не должен превышать 5мб"
+			document.getElementsByClassName('attach_span')[0].innerHTML = a;
+			document.getElementsByClassName('attach_span')[0].style.display = "block";
+			document.getElementsByClassName('attach')[0].style.color = "red";
+    		document.getElementsByClassName('attach')[0].title = this.value;
+    		document.getElementById('but').disabled = 1;
+		}else {
+			if(this.value){
+			  	document.getElementsByClassName('attach')[0].style.color = "#156aff";
+			    document.getElementsByClassName('attach')[0].title = this.value;
+			    document.getElementsByClassName('attach_span')[0].style.display = "none";
+			    document.getElementById('but').disabled = 0;
+			  }
+			else{
+				document.getElementsByClassName('attach')[0].style.color = "black";
+			  	document.getElementsByClassName('attach')[0].title = 'Файл не выбран';
+			  	document.getElementsByClassName('attach_span')[0].style.display = "none";
+			  	document.getElementById('but').disabled = 0;
+			}
+		}}else{
+			document.getElementsByClassName('attach')[0].style.color = "black";
+			document.getElementsByClassName('attach_span')[0].style.display = "none";
+			document.getElementById('but').disabled = 0;
+		}
+  		})
+	</script>
+</body>
+</html>
